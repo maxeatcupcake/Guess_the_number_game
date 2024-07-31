@@ -11,16 +11,14 @@ while user_try!=secret_number:
         nb_attempt+=1
     elif user_try > secret_number:
         print("Too high !")
-        nb_attempt+=1   
+        nb_attempt+=1
     else:
         print("Correct !")
         nb_attempt+=1
         print(f'You did it in {nb_attempt} tries !')
-data = [f'{nb_attempt}'];      
-if nb_attempt > data:
-    print("TEST")
-else:
-    highscore = shelve.open('highscore.txt')
-del highscore[f'{nb_attempt}']
-highscore[f'{nb_attempt}'] = highscore
-highscore.close()
+    with shelve.open('highscore') as highscore:
+        best_score = highscore['best_score']
+        print(f'The highscore is in {best_score} tries')
+        if best_score is None or nb_attempt < best_score:
+            highscore['best_score'] = nb_attempt    
+            print(f'New highscore: {nb_attempt} tries!')
