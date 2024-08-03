@@ -16,7 +16,7 @@ while user_try!=secret_number:
         print("Correct !")
         nb_attempt+=1
         print(f'You did it in {nb_attempt} tries !')
-    with shelve.open('highscore') as highscore:
+with shelve.open('highscore') as highscore:
         best_score = highscore['best_score']
         print(f'The highscore is in {best_score} tries')
         if best_score is None or nb_attempt < best_score:
